@@ -3,7 +3,10 @@
 	"version": "0.0.1",
 	"description": "An Airbib parser",
 	"author": "Dmitry Fedyuk",
-	"dependencies": {"nightmare": "^3.0.1"},
+	"dependencies": {
+		"nightmare": "^3.0.1",
+		"vo": "^4.0.2"
+	},
 	"license": "MIT",
 	"main": "main.js",
 	"repository": {
