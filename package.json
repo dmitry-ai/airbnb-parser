@@ -1,10 +1,13 @@
 {
-	"name": "dmitry-ai/airbnb-parser"
-	,"version": "0.0.1"
-	,"description": "An Airbib parser"
-	,"author": "Dmitry Fedyuk"
-	,"dependencies": {}
-	,"license": "MIT"
-	,"main": "main.js"
-	,"repository": {"type": "git", "url": "https://github.com/dmitry-ai/airbnb-parser.git"}
+	"name": "dmitry-ai/airbnb-parser",
+	"version": "0.0.1",
+	"description": "An Airbib parser",
+	"author": "Dmitry Fedyuk",
+	"dependencies": {"nightmare": "^3.0.1"},
+	"license": "MIT",
+	"main": "main.js",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/dmitry-ai/airbnb-parser.git"
+	}
 }
