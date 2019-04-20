@@ -1,9 +1,10 @@
 {
-	"name": "dmitry-ai/airbnb-parser",
+	"name": "dmitry_ai/airbnb_parser",
 	"version": "0.0.1",
 	"description": "An Airbib parser",
 	"author": "Dmitry Fedyuk",
 	"dependencies": {
+		"lodash": "^4.17.11",
 		"nightmare": "^3.0.1",
 		"vo": "^4.0.2"
 	},
