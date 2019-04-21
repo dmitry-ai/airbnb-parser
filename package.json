@@ -5,8 +5,7 @@
 	"author": "Dmitry Fedyuk",
 	"dependencies": {
 		"lodash": "^4.17.11",
-		"nightmare": "^3.0.1",
-		"vo": "^4.0.2"
+		"nightmare": "^3.0.1"
 	},
 	"license": "MIT",
 	"main": "main.js",
