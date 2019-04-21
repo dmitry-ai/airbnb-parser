@@ -1,8 +1,9 @@
 // 2019-04-20
 const _ = require('lodash');
+const mConfig = require('./config.js');
 const Nightmare = require('nightmare');
-const n = Nightmare({height: 1000, openDevTools: true, show: true, width: 1900});
 module.exports = {execute:(url, cb) => {
+	const n = Nightmare({height: 1000, /*openDevTools: true,*/ show: mConfig.show, width: 1900});
 	n.goto(url);
 	n.inject('js', 'lib/jquery-3.4.0.js');
 	n.inject('js', 'lib/lodash-4.17.11.js');
@@ -32,12 +33,10 @@ module.exports = {execute:(url, cb) => {
 					)
 				,'xx_large'
 			);
-			var r = {};
-			r[listing['id']] = photos;
-			return r;
+			return {id: listing['id'], photos: photos};
 		})
 		.then(v => {
-			n.end().then(() => {cb(v);});
+			n.end().then(() => {cb(v.id, v.photos);});
 		})
 		.catch(e => {})
 	;

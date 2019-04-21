@@ -1,10 +1,13 @@
 // 2019-04-21
+const mConfig = require('./config.js');
 const mScroll = require('./scroll.js');
 const Nightmare = require('nightmare');
+var curPage = 0;
+const maxPages = 100;
 const self = module.exports = {
 	execute:(url, cb) => {self.page(url, [], cb);}
 	,page:(url, result, cb) => {
-		const n = Nightmare({height: 1000, modal: false, openDevTools: true, show: true, width: 800});
+		const n = Nightmare({height: 1000, modal: false, /*openDevTools: true,*/ show: mConfig.show, width: 800});
 		n.goto(url);
 		n.wait('div[itemprop="itemListElement"]');
 		n.inject('js', 'lib/jquery-3.4.0.js');
@@ -17,7 +20,7 @@ const self = module.exports = {
 					);}).get();
 				})
 				.then(flats => {
-					console.log('flats: ' + flats.length);
+					//console.log('flats: ' + flats.length);
 					n.evaluate(() => {
 						var $ = jQuery;
 						var r = null;
@@ -25,11 +28,12 @@ const self = module.exports = {
 							$('a[aria-label*=current]', $('ul[data-id=SearchResultsPagination]'))
 								.closest('li').next('li')
 						);
-						return !$a.length ? null : 'https://www.airbnb.com' + $a.attr('href');
+						return (!$a.length ? null : 'https://www.airbnb.com' + $a.attr('href'));
 					}).then(next => {
 						n.end().then(() => {
 							result = result.concat(flats);
-							if (!next) {
+							curPage++;
+							if (!next || curPage >= maxPages) {
 								cb(result);
 							}
 							else {
