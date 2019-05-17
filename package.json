@@ -1,5 +1,5 @@
 {
-	"name": "dmitry_ai/airbnb_parser",
+	"name": "dmitry-ai--airbnb-parser",
 	"version": "0.0.1",
 	"description": "An Airbib parser",
 	"author": "Dmitry Fedyuk",
@@ -8,7 +8,8 @@
 		"lodash": "^4.17.11",
 		"nightmare": "^3.0.1",
 		"path": "^0.12.7",
-		"shelljs": "^0.8.3"
+		"shelljs": "^0.8.3",
+		"yargs": "^13.2.4"
 	},
 	"license": "MIT",
 	"main": "main.js",
