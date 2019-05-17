@@ -3,7 +3,7 @@ const mConfig = require('./config.js');
 const mScroll = require('./scroll.js');
 const Nightmare = require('nightmare');
 var curPage = 0;
-const maxPages = 100;
+const maxPages = mConfig.maxPages();
 const self = module.exports = {
 	execute:(url, cb) => {self.page(url, [], cb);}
 	,page:(url, result, cb) => {

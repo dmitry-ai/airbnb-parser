@@ -13,6 +13,12 @@ module.exports = {
 	;}),
 	/**
 	 * 2017-05-18
+	 * @used-by nav.js
+	 * @returns {Number}
+	 */
+	maxPages: _.once(() => {return yargs.argv['maxPages'] || 999999;}),
+	/**
+	 * 2017-05-18
 	 * @used-by flat.js
 	 * @used-by nav.js
 	 * @returns {Boolean}
