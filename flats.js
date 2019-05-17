@@ -1,10 +1,10 @@
 // 2019-04-21
 const _ = require('lodash');
+const mConfig = require('./config.js');
 const mDownloader = require('image-downloader');
 const mFlat = require('./flat.js');
-const mPath = require('path');
 const mShell = require('shelljs');
-const fBase = mPath.resolve(mPath.dirname(__dirname), 'images');
+const fBase = mConfig.imagesDir();
 const self = module.exports = {
 	execute:(flats, cb) => {
 		mShell.rm('-rf', fBase);

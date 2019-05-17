@@ -3,7 +3,7 @@ const _ = require('lodash');
 const mConfig = require('./config.js');
 const Nightmare = require('nightmare');
 module.exports = {execute:(url, cb) => {
-	const n = Nightmare({height: 1000, /*openDevTools: true,*/ show: mConfig.show, width: 1900});
+	const n = Nightmare({height: 1000, openDevTools: mConfig.openDevTools(), show: mConfig.show(), width: 1900});
 	n.goto(url);
 	n.inject('js', 'lib/jquery-3.4.0.js');
 	n.inject('js', 'lib/lodash-4.17.11.js');
