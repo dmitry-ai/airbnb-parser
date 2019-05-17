@@ -20,10 +20,8 @@ const self = module.exports = {
 					);}).get();
 				})
 				.then(flats => {
-					//console.log('flats: ' + flats.length);
 					n.evaluate(() => {
 						var $ = jQuery;
-						var r = null;
 						var $a = $('a[aria-label*=Page]',
 							$('a[aria-label*=current]', $('ul[data-id=SearchResultsPagination]'))
 								.closest('li').next('li')
