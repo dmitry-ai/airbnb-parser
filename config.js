@@ -30,5 +30,5 @@ module.exports = {
 	 * @used-by nav.js
 	 * @returns {Boolean}
 	 */
-	show: _.once(() => {return !!yargs.argv['show'];})
+	show: _.once(() => {return yargs.argv['openDevTools'] || yargs.argv['show'];})
 };
