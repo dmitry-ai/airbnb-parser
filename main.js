@@ -16,7 +16,7 @@ const fixedParams = {
 	,amenities: [
 		4
 		,5
-		,8
+		,8  // 2019-12-20 Kitchen
 		,25
 		,33 // 2019-12-20 Washer
 		,46
