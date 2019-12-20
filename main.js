@@ -14,14 +14,14 @@ const mJP = require('jquery-param');
 const fixedParams = {
 	adults: 2
 	,amenities: [
-		4
-		,5
+		4 // 2019-12-20 Wi-Fi
+		,5  // 2019-12-20 Air conditioner
 		,8  // 2019-12-20 Kitchen
-		,25
+		,25 // 2019-12-20 Hot tub
 		,33 // 2019-12-20 Washer
-		,46
-		,47
-		,78
+		,46 // 2019-12-20 Iron
+		,47 // 2019-12-20 Laptop friendly workspace
+		,78 // 2019-12-20 Private bathroom
 	]
 	,map_toggle: false
 	,min_bathrooms: 1
