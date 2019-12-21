@@ -12,7 +12,7 @@ const self = module.exports = {
 		});
 		n.goto(url);
 		n.wait('div[itemprop="itemListElement"]');
-		n.inject('js', 'lib/jquery-3.4.0.js');
+		n.inject('js', 'lib/jquery.js');
 		n.evaluate(() => {jQuery.noConflict();});
 		mScroll.execute(n, () => {
 			n
