@@ -28,8 +28,7 @@ module.exports = {execute:(url, cb) => {
 			}, function(d) {
 				const flat = _.get(d ,'pdp_listing_detail');
 				const photos = _.mapValues(
-					_.keyBy(_.map(flat['photos'], p => {return _.pick(p, ['id', 'xx_large']);}), 'id')
-					,'xx_large'
+					_.keyBy(_.map(flat['photos'], p => {return _.pick(p, ['id', 'xx_large']);}), 'id'), 'xx_large'
 				);
 				cb({id: flat['id'], photos: photos});
 			});
