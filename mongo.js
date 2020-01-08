@@ -1,5 +1,6 @@
 // 2019-01-08
 // 1) http://mongodb.github.io/node-mongodb-native/3.4
+// https://github.com/mongodb/node-mongodb-native
 // https://www.mongodb.com/blog/post/quick-start-nodejs-mongodb--how-to-get-connected-to-your-database
 // 2) https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#Assigning_to_new_variable_names
 // 3) @TODO https://mongoosejs.com
@@ -12,11 +13,14 @@ async function main() {
 	try {
 		await mongo.connect();
 		const db = mongo.db('airbnb');
-		db.collection('inventory', function (err, c) {
-			c.find().toArray(function(err, items) {
-				if(err) throw err;
-				console.log(items);
-			});
+		/**
+		 * 2020-01-09
+		 * https://github.com/mongodb/node-mongodb-native/blob/v3.4.1/lib/db.js#L387-L479
+		 * http://mongodb.github.io/node-mongodb-native/3.4/api/Db.html#collection
+		 * «Fetch a specific collection (containing the actual collection information)».
+		 */
+		db.collection('inventory').find().toArray(function(e, items) {
+			console.log(items);
 		});
 	}
 	finally {
