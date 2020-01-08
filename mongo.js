@@ -5,7 +5,7 @@
 // 3) @TODO https://mongoosejs.com
 const {MongoClient: mMongo} = require('mongodb');
 const assert = require('assert');
-const client = new mMongo('mongodb://localhost:27017');
+const client = new mMongo('mongodb://localhost:27017', {useUnifiedTopology: true});
 client.connect(function(e) {
 	assert.equal(null, e);
 	const db = client.db('airbnb');
