@@ -20,7 +20,16 @@ async function main() {
 		 * 1) https://github.com/mongodb/node-mongodb-native/blob/v3.4.1/lib/db.js#L387-L479
 		 * http://mongodb.github.io/node-mongodb-native/3.4/api/Db.html#collection
 		 * «Fetch a specific collection (containing the actual collection information)».
-		 * 2) "What is MongoDBs strict mode and is it a good idea to use?" https://stackoverflow.com/a/21595828
+		 * 2) «What is MongoDBs strict mode and is it a good idea to use?» https://stackoverflow.com/a/21595828
+		 * 3) Collection::find():
+		 * «Creates a cursor for a query that can be used to iterate over results from MongoDB».
+		 * http://mongodb.github.io/node-mongodb-native/3.4/api/Collection.html#find
+		 * 4) Cursor::toArray():
+		 * «Returns an array of documents.
+		 * The caller is responsible for making sure that there is enough memory to store the results.
+		 * Note that the array only contains partial results when this cursor had been previously accessed.
+		 * In that case, cursor.rewind() can be used to reset the cursor.»
+		 * http://mongodb.github.io/node-mongodb-native/3.4/api/Cursor.html#toArray
 		 */
 		db.collection('inventory').find().toArray(function(e, items) {
 			console.log(items);
