@@ -8,6 +8,7 @@
 		"jquery-param": "*",
 		"lodash": "*",
 		"nightmare": "*",
+		"mongodb": "*",
 		"path": "*",
 		"shelljs": "*",
 		"yargs": "*"
