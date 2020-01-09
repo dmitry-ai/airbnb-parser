@@ -30,6 +30,8 @@ module.exports = {execute:(url, cb) => {
 				const photos = _.mapValues(
 					_.keyBy(_.map(flat['photos'], p => {return _.pick(p, ['id', 'xx_large']);}), 'id'), 'xx_large'
 				);
+				// 2020-01-09
+				// A photo URL looks like https://a0.muscache.com/im/pictures/<GUID>.jpg?aki_policy=xx_large
 				cb(null, {id: flat['id'], photos: photos});
 			});
 		});})

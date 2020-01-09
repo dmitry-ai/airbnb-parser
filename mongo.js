@@ -24,6 +24,7 @@ async function main() {
 		 * 3) Collection::find():
 		 * «Creates a cursor for a query that can be used to iterate over results from MongoDB».
 		 * http://mongodb.github.io/node-mongodb-native/3.4/api/Collection.html#find
+		 * 3.1) See also: https://docs.mongodb.com/v4.2/reference/method/db.collection.find
 		 * 4) Cursor::toArray():
 		 * «Returns an array of documents.
 		 * The caller is responsible for making sure that there is enough memory to store the results.
@@ -31,9 +32,9 @@ async function main() {
 		 * In that case, cursor.rewind() can be used to reset the cursor.»
 		 * http://mongodb.github.io/node-mongodb-native/3.4/api/Cursor.html#toArray
 		 */
-		db.collection('inventory').find().toArray(function(e, items) {
-			console.log(items);
-		});
+		const c = db.collection('inventory');
+		await c.insertMany([{a : 1}, {a : 2}]);
+		c.find().toArray(function(e, items) {console.log(items);});
 	}
 	finally {
 		mongo.close();
