@@ -26,17 +26,11 @@ module.exports = {execute:(url, cb) => {
 			$.getJSON(`https://www.airbnb.com/api/v2/pdp_listing_details/${id}`, {
 				_format: 'for_rooms_show', key: key
 			}, function(d) {
-				const flat = _.get(d ,'pdp_listing_detail');
-				const photos = _.mapValues(
-					_.keyBy(_.map(flat['photos'], p => {return _.pick(p, ['id', 'xx_large']);}), 'id'), 'xx_large'
-				);
-				// 2020-01-09
-				// A photo URL looks like https://a0.muscache.com/im/pictures/<GUID>.jpg?aki_policy=xx_large
-				cb(null, {id: flat['id'], photos: photos});
+				cb(null, _.get(d, 'pdp_listing_detail'));
 			});
 		});})
 		.then(v => {
-			n.end().then(() => {cb(v.id, v.photos);});
+			n.end().then(() => {cb(v);});
 		})
 		.catch(e => {})
 	;
