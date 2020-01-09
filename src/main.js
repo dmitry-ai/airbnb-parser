@@ -38,7 +38,5 @@ mNav.execute(url, flats => {
 	console.log(`Flats: ${flats.length}`);
 	const fBase = mPath.resolve(mPath.dirname(__dirname), 'images');
 	mShell.rm('-rf', fBase);
-	mFlats.execute(flats, () => {
-		console.log('done');
-	});
+	mFlats.execute(flats, () => console.log('done'));
 });

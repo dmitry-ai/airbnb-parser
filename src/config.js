@@ -1,4 +1,5 @@
 // 2019-04-21
+/** @module config */
 const _ = require('lodash');
 const mPath = require('path');
 const yargs = require('yargs');

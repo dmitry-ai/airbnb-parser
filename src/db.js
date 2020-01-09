@@ -1,4 +1,5 @@
 // 2020-01-09
+/** @module db */
 const _ = require('lodash');
 const {MongoClient: mMongo} = require('mongodb');
 const self = module.exports = {

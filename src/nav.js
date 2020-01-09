@@ -1,11 +1,31 @@
 // 2019-04-21
+/** @module nav */
 const mConfig = require('./config.js');
 const mScroll = require('./scroll.js');
 const Nightmare = require('nightmare');
 var curPage = 0;
 const maxPages = mConfig.maxPages();
 const self = module.exports = {
+	/**
+	 * 2020-01-10
+	 * @callback executeCb
+	 * @param {object} r
+	 */
+	/**
+	 * 2020-01-10
+	 * @used-by main.js
+	 * @param {string} url
+	 * @param {executeCb} cb
+	 */
 	execute(url, cb) {self.page(url, [], cb);}
+	/**
+	 * 2020-01-10
+	 * @private
+	 * @used-by execute()
+	 * @param {string} url
+	 * @param {string[]} result
+	 * @param {executeCb} cb
+	 */
 	,page(url, result, cb) {
 		const n = Nightmare({
 			height: 1000, modal: false, openDevTools: mConfig.openDevTools(), show: mConfig.show(), width: 800
@@ -13,7 +33,7 @@ const self = module.exports = {
 		n.goto(url);
 		n.wait('div[itemprop="itemListElement"]');
 		n.inject('js', 'lib/jquery.js');
-		n.evaluate(() => {jQuery.noConflict();});
+		n.evaluate(() => jQuery.noConflict());
 		mScroll.execute(n, () => {
 			n
 				.evaluate(() => {return jQuery('div[itemprop=itemListElement] meta[itemprop=url]').map(function() {return(

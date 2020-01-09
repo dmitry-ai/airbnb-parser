@@ -1,4 +1,5 @@
 // 2019-04-20
+/** @module flat */
 const _ = require('lodash');
 const mConfig = require('./config.js');
 const Nightmare = require('nightmare');

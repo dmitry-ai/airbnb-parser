@@ -1,4 +1,5 @@
 // 2019-04-21
+/** @module flats */
 const _ = require('lodash');
 const mConfig = require('./config.js');
 const mDB = require('./db.js');
@@ -24,7 +25,7 @@ const self = module.exports = {
 			const flat = flats.shift();
 			mFlat.execute(flat, function(d) {
 				const flatId = d['id'];
-				console.log('Flat: ' + flatId);
+				console.log(`Flat: ${flatId}`);
 				mDB.save(d).then(() => {
 					var fFlat = fBase + '/' + flatId;
 					mShell.rm('-rf', fFlat);
