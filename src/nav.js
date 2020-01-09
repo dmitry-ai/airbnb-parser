@@ -2,7 +2,7 @@
 /** @module nav */
 const mConfig = require('./config.js');
 const mScroll = require('./scroll.js');
-const Nightmare = require('nightmare');
+const Nightmare = require('nightmare'); // 2020-01-10 https://github.com/segmentio/nightmare
 var curPage = 0;
 const maxPages = mConfig.maxPages();
 const self = module.exports = {
@@ -33,6 +33,9 @@ const self = module.exports = {
 		n.goto(url);
 		n.wait('div[itemprop="itemListElement"]');
 		n.inject('js', 'lib/jquery.js');
+		// 2020-01-10
+		// https://github.com/segmentio/nightmare/tree/3.0.2#evaluatefn-arg1-arg2
+		// https://github.com/segmentio/nightmare/blob/3.0.2/lib/actions.js#L611-L642
 		n.evaluate(() => jQuery.noConflict());
 		mScroll.execute(n, () => {
 			n
