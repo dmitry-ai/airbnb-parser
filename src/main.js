@@ -1,7 +1,7 @@
 // 2019-04-19
 // 2019-05-18
 // An usage example:
-// node main \
+// node src/main \
 //	--imagesDir=C:/work/clients/nightmare/images-2020-01-09 \
 //	--location="Bangkok, Thailand" \
 //	--maxPages=1
