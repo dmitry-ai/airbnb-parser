@@ -35,7 +35,7 @@ const fixedParams = {
 };
 const url = `https://www.airbnb.com/s/homes?${mJP(_.assign(fixedParams, {query: require('yargs').argv['location']}))}`;
 mNav.execute(url, flats => {
-	console.log('Flats: ' + flats.length);
+	console.log(`Flats: ${flats.length}`);
 	const fBase = mPath.resolve(mPath.dirname(__dirname), 'images');
 	mShell.rm('-rf', fBase);
 	mFlats.execute(flats, () => {
