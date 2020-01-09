@@ -5,8 +5,8 @@ const Nightmare = require('nightmare');
 var curPage = 0;
 const maxPages = mConfig.maxPages();
 const self = module.exports = {
-	execute:(url, cb) => {self.page(url, [], cb);}
-	,page:(url, result, cb) => {
+	execute(url, cb) {self.page(url, [], cb);}
+	,page(url, result, cb) {
 		const n = Nightmare({
 			height: 1000, modal: false, openDevTools: mConfig.openDevTools(), show: mConfig.show(), width: 800
 		});
@@ -43,9 +43,7 @@ const self = module.exports = {
 						});
 					});
 				})
-				.catch(e => {
-					console.log(e);
-				})
+				.catch(e => {console.log(e);})
 			;
 		});
 	}
