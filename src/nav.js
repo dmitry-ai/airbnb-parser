@@ -36,11 +36,12 @@ const self = module.exports = {
 		n.evaluate(() => jQuery.noConflict());
 		mScroll.execute(n, () => {
 			n
-				.evaluate(() => {return jQuery('div[itemprop=itemListElement] meta[itemprop=url]').map(function() {return(
+				// 2020-01-10 The arrow function syntax does not work inside evaluate()
+				.evaluate(() => jQuery('div[itemprop=itemListElement] meta[itemprop=url]').map(function() {return(
 					'https://' + jQuery(this).attr('content').split('?')[0]
 						// 2019-12-20 The URL now contains «undefined» or «null» instead of «www.airbnb.com».
 						.replace(/^undefined|null/, 'www.airbnb.com')
-				);}).get();})
+				);}).get())
 				.then(flats => {
 					n.evaluate(() => {
 						var $ = jQuery;
