@@ -26,7 +26,7 @@ const self = module.exports = {
 	 * @param {string[]} result
 	 * @param {executeCb} cb
 	 */
-	,page(url, result, cb) {
+	,async page(url, result, cb) {
 		const n = Nightmare({
 			height: 1000, modal: false, openDevTools: mConfig.openDevTools(), show: mConfig.show(), width: 800
 		});
@@ -37,38 +37,33 @@ const self = module.exports = {
 		// https://github.com/segmentio/nightmare/tree/3.0.2#evaluatefn-arg1-arg2
 		// https://github.com/segmentio/nightmare/blob/3.0.2/lib/actions.js#L611-L642
 		n.evaluate(() => jQuery.noConflict());
-		mScroll.execute(n, () => {
-			n
+		mScroll.execute(n, async () => {
+			const flats = await n.evaluate(() =>
 				// 2020-01-10 The arrow function syntax does not work inside evaluate()
-				.evaluate(() => jQuery('div[itemprop=itemListElement] meta[itemprop=url]').map(function() {return(
+				jQuery('div[itemprop=itemListElement] meta[itemprop=url]').map(function() {return(
 					'https://' + jQuery(this).attr('content').split('?')[0]
 						// 2019-12-20 The URL now contains «undefined» or «null» instead of «www.airbnb.com».
 						.replace(/^undefined|null/, 'www.airbnb.com')
 				);}).get())
-				.then(flats => {
-					n.evaluate(() => {
-						var $ = jQuery;
-						var $a = $('a[aria-label*=Page]',
-							$('a[aria-label*=current]', $('ul[data-id=SearchResultsPagination]'))
-								.closest('li').next('li')
-						);
-						return (!$a.length ? null : 'https://www.airbnb.com' + $a.attr('href'));
-					}).then(next => {
-						n.end().then(() => {
-							result = result.concat(flats);
-							curPage++;
-							if (!next || curPage >= maxPages) {
-								cb(result);
-							}
-							else {
-								console.log('next: ' + next);
-								self.page(next, result, cb);
-							}
-						});
-					});
-				})
-				.catch(e => {console.log(e);})
 			;
+			const next = await n.evaluate(() => {
+				var $ = jQuery;
+				var $a = $('a[aria-label*=Page]',
+					$('a[aria-label*=current]', $('ul[data-id=SearchResultsPagination]'))
+						.closest('li').next('li')
+				);
+				return (!$a.length ? null : 'https://www.airbnb.com' + $a.attr('href'));
+			});
+			await n.end();
+			result = result.concat(flats);
+			curPage++;
+			if (!next || curPage >= maxPages) {
+				cb(result);
+			}
+			else {
+				console.log(`next: ${next}`);
+				self.page(next, result, cb);
+			}
 		});
 	}
 };
