@@ -13,7 +13,7 @@ module.exports = {
 		if (prev !== cur) {
 			prev = cur;
 			cur = await n.evaluate(() => document.body.scrollHeight);
-			n.scrollTo(cur, 0);//.wait(1000);
+			n.scrollTo(cur, 0).wait(1000);
 			await this.step(n, prev, cur);
 		}
 	}

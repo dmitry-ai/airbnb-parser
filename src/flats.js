@@ -26,7 +26,7 @@ const self = module.exports = {
 			mFlat.execute(flat, function(d) {
 				const flatId = d['id'];
 				console.log(`Flat: ${flatId}`);
-				mDB.save(d).then(() => {
+				//mDB.save(d).then(() => {
 					var fFlat = fBase + '/' + flatId;
 					mShell.rm('-rf', fFlat);
 					mShell.mkdir('-p', fFlat);
@@ -42,7 +42,7 @@ const self = module.exports = {
 						;
 					});
 					self.step(flats, cb);
-				});
+				//});
 			});
 		}
 	}

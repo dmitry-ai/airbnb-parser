@@ -1,5 +1,5 @@
 #!/bin/bash
-node src/main \
-	--imagesDir=C:/work/clients/nightmare/images-2020-01-09 \
+node ./src/main.js \
+	--imagesDir=C:/work/clients/nightmare/images-2020-01-10 \
 	--location="Bangkok, Thailand" \
-	--maxPages=1
+	--maxPages=3
