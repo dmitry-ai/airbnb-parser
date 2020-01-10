@@ -37,33 +37,32 @@ const self = module.exports = {
 		// https://github.com/segmentio/nightmare/tree/3.0.2#evaluatefn-arg1-arg2
 		// https://github.com/segmentio/nightmare/blob/3.0.2/lib/actions.js#L611-L642
 		n.evaluate(() => jQuery.noConflict());
-		mScroll.execute(n, async () => {
-			const flats = await n.evaluate(() =>
-				// 2020-01-10 The arrow function syntax does not work inside evaluate()
-				jQuery('div[itemprop=itemListElement] meta[itemprop=url]').map(function() {return(
-					'https://' + jQuery(this).attr('content').split('?')[0]
-						// 2019-12-20 The URL now contains «undefined» or «null» instead of «www.airbnb.com».
-						.replace(/^undefined|null/, 'www.airbnb.com')
-				);}).get())
-			;
-			const next = await n.evaluate(() => {
-				var $ = jQuery;
-				var $a = $('a[aria-label*=Page]',
-					$('a[aria-label*=current]', $('ul[data-id=SearchResultsPagination]'))
-						.closest('li').next('li')
-				);
-				return !$a.length ? null : 'https://www.airbnb.com' + $a.attr('href');
-			});
-			await n.end();
-			result = result.concat(flats);
-			curPage++;
-			if (!next || curPage >= maxPages) {
-				cb(result);
-			}
-			else {
-				console.log(`next: ${next}`);
-				self.page(next, result, cb);
-			}
+		await mScroll.execute(n);
+		const flats = await n.evaluate(() =>
+			// 2020-01-10 The arrow function syntax does not work inside evaluate()
+			jQuery('div[itemprop=itemListElement] meta[itemprop=url]').map(function() {return(
+				'https://' + jQuery(this).attr('content').split('?')[0]
+					// 2019-12-20 The URL now contains «undefined» or «null» instead of «www.airbnb.com».
+					.replace(/^undefined|null/, 'www.airbnb.com')
+			);}).get())
+		;
+		const next = await n.evaluate(() => {
+			var $ = jQuery;
+			var $a = $('a[aria-label*=Page]',
+				$('a[aria-label*=current]', $('ul[data-id=SearchResultsPagination]'))
+					.closest('li').next('li')
+			);
+			return !$a.length ? null : 'https://www.airbnb.com' + $a.attr('href');
 		});
+		await n.end();
+		result = result.concat(flats);
+		curPage++;
+		if (!next || curPage >= maxPages) {
+			cb(result);
+		}
+		else {
+			console.log(`next: ${next}`);
+			self.page(next, result, cb);
+		}
 	}
 };
