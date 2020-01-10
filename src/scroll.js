@@ -1,18 +1,16 @@
 // 2019-04-21 https://github.com/segmentio/nightmare/issues/625#issuecomment-217730846
 /** @module scroll */
-const self = module.exports = {
-	execute(n, cb) {self.step(n, null, 0, cb);},
-	step(n, prev, cur, cb) {
+module.exports = {
+	execute(n, cb) {this.step(n, null, 0, cb);},
+	async step(n, prev, cur, cb) {
 		if (prev === cur) {
 			cb();
 		}
 		else {
 			prev = cur;
-			n.evaluate(() => document.body.scrollHeight).then((v) => {
-				cur = v;
-				n.scrollTo(v, 0).wait(1000);
-				self.step(n, prev, cur, cb);
-			});
+			cur = await n.evaluate(() => document.body.scrollHeight);
+			n.scrollTo(cur, 0).wait(1000);
+			this.step(n, prev, cur, cb);
 		}
 	}
 };
