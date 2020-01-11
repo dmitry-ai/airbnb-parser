@@ -40,23 +40,21 @@ module.exports = {
 		// https://github.com/segmentio/nightmare/blob/3.0.2/lib/actions.js#L611-L642
 		n.evaluate(() => jQuery.noConflict());
 		await mScroll.execute(n);
-		const r = [
-			await n.evaluate(() =>
+		const r = await n.evaluate(() => {
+			var $ = jQuery;
+			var $a = $('a[aria-label*=Page]',
+				$('a[aria-label*=current]', $('ul[data-id=SearchResultsPagination]'))
+					.closest('li').next('li')
+			);
+			return [
 				// 2020-01-10 The arrow function syntax does not work inside evaluate()
-				jQuery('div[itemprop=itemListElement] meta[itemprop=url]').map(function() {return(
-					'https://' + jQuery(this).attr('content').split('?')[0]
+				$('div[itemprop=itemListElement] meta[itemprop=url]').map(function() {return(
+					'https://' + $(this).attr('content').split('?')[0]
 						// 2019-12-20 The URL now contains «undefined» or «null» instead of «www.airbnb.com».
 						.replace(/^undefined|null/, 'www.airbnb.com')
-			);}).get())
-			,await n.evaluate(() => {
-				var $ = jQuery;
-				var $a = $('a[aria-label*=Page]',
-					$('a[aria-label*=current]', $('ul[data-id=SearchResultsPagination]'))
-						.closest('li').next('li')
-				);
-				return !$a.length ? false : `https://www.airbnb.com${$a.attr('href')}`;
-			})
-		];
+				);}).get()
+			,!$a.length ? false : `https://www.airbnb.com${$a.attr('href')}`
+		]});
 		await n.end();
 		return r;
 	}
