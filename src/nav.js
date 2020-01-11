@@ -5,28 +5,22 @@ const mScroll = require('./scroll.js');
 const Nightmare = require('nightmare'); // 2020-01-10 https://github.com/segmentio/nightmare
 var curPage = 0;
 const maxPages = mConfig.maxPages();
-const self = module.exports = {
-	/**
-	 * 2020-01-10
-	 * @callback executeCb
-	 * @param {object} r
-	 */
+module.exports = {
 	/**
 	 * 2020-01-10
 	 * @used-by main.js
 	 * @param {string} url
-	 * @param {executeCb} cb
+	 * @return {Promise<void>}
 	 */
-	execute(url, cb) {self.page(url, [], cb);}
+	async execute(url) {return this.page(url, []);}
 	/**
 	 * 2020-01-10
 	 * @private
 	 * @used-by execute()
 	 * @param {string} url
-	 * @param {string[]} result
-	 * @param {executeCb} cb
+	 * @param {string[]} r
 	 */
-	,async page(url, result, cb) {
+	,async page(url, r) {
 		const n = Nightmare({
 			height: 1000, modal: false, openDevTools: mConfig.openDevTools(), show: mConfig.show(), width: 800
 		});
@@ -55,14 +49,12 @@ const self = module.exports = {
 			return !$a.length ? false : `https://www.airbnb.com${$a.attr('href')}`;
 		});
 		await n.end();
-		result = result.concat(flats);
+		r = r.concat(flats);
 		curPage++;
-		if (!next || curPage >= maxPages) {
-			cb(result);
-		}
-		else {
+		if (next && curPage < maxPages) {
 			console.log(`next: ${next}`);
-			self.page(next, result, cb);
+			r = this.page(next, r);
 		}
+		return r;
 	}
 };

@@ -35,7 +35,8 @@ const fixedParams = {
 	,toddlers: 0
 };
 const url = `https://www.airbnb.com/s/homes?${mJP(_.assign(fixedParams, {query: mConfig.location()}))}`;
-mNav.execute(url, flats => {
+(async () => {
+	const flats = await mNav.execute(url);
 	console.log(`Flats: ${flats.length}`);
 	mFlats.execute(flats, () => console.log('done'));
-});
+})();
