@@ -6,6 +6,7 @@
 //	--location="Bangkok, Thailand" \
 //	--maxPages=1
 const _ = require('lodash');
+const mConfig = require('./config.js');
 const mFlats = require('./flats.js');
 const mNav = require('./nav.js');
 const mPath = require('path');
@@ -33,10 +34,8 @@ const fixedParams = {
 	,search_type: 'PAGINATION'
 	,toddlers: 0
 };
-const url = `https://www.airbnb.com/s/homes?${mJP(_.assign(fixedParams, {query: require('yargs').argv['location']}))}`;
+const url = `https://www.airbnb.com/s/homes?${mJP(_.assign(fixedParams, {query: mConfig.location()}))}`;
 mNav.execute(url, flats => {
 	console.log(`Flats: ${flats.length}`);
-	const fBase = mPath.resolve(mPath.dirname(__dirname), 'images');
-	mShell.rm('-rf', fBase);
 	mFlats.execute(flats, () => console.log('done'));
 });

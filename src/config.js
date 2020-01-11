@@ -7,6 +7,7 @@ const mPath = require('path');
  * @type {{
  *		imagesDir: ?string
  *		,maxPages: ?number
+ *		,location: string
  *		,openDevTools: ?boolean
  *		,show: boolean
  * }}
@@ -20,6 +21,12 @@ module.exports = {
 	 * @return {boolean}
 	 */
 	imagesDir() {return argv.imagesDir || mPath.resolve(mPath.dirname(__dirname), 'images');},
+	/**
+	 * 2020-01-11
+	 * @used-by main.js
+	 * @return {string}
+	 */
+	location() {return argv.location},
 	/**
 	 * 2019-05-18
 	 * @used-by nav.js
