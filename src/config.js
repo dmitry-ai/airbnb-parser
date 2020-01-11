@@ -1,35 +1,43 @@
 // 2019-04-21
 /** @module config */
-const _ = require('lodash');
 const mPath = require('path');
-const yargs = require('yargs');
+/**
+ * 2020-01-11
+ * `.argv` is a getter: https://github.com/yargs/yargs/blob/v15.1.0/yargs.js#L1040-L1043
+ * @type {{
+ *		imagesDir: ?string
+ *		,maxPages: ?number
+ *		,openDevTools: ?boolean
+ *		,show: boolean
+ * }}
+ */
+const argv = require('yargs').argv;
 module.exports = {
 	/**
-	 * 2017-05-18
+	 * 2019-05-18
+	 * 2020-01-11 https://github.com/yargs/yargs/blob/v15.1.0/yargs.js#L1040-L1043
 	 * @used-by flats.js
 	 * @return {boolean}
 	 */
-	imagesDir: _.once(() => {return yargs.argv['imagesDir'] ||
-		mPath.resolve(mPath.dirname(__dirname), 'images')
-	;}),
+	imagesDir() {return argv.imagesDir || mPath.resolve(mPath.dirname(__dirname), 'images');},
 	/**
-	 * 2017-05-18
+	 * 2019-05-18
 	 * @used-by nav.js
 	 * @return {number}
 	 */
-	maxPages: _.once(() => {return yargs.argv['maxPages'] || 999999;}),
+	maxPages() {return argv.maxPages || 999999;},
 	/**
-	 * 2017-05-18
+	 * 2019-05-18
 	 * @used-by flat.js
 	 * @used-by nav.js
 	 * @return {boolean}
 	 */
-	openDevTools: _.once(() => {return !!yargs.argv['openDevTools'];}),
+	openDevTools() {return !!argv.openDevTools;},
 	/**
-	 * 2017-05-18
+	 * 2019-05-18
 	 * @used-by flat.js
 	 * @used-by nav.js
 	 * @return {boolean}
 	 */
-	show: _.once(() => {return yargs.argv['openDevTools'] || yargs.argv['show'];})
+	show() {return !!(argv.openDevTools || argv.show);}
 };
