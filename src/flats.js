@@ -3,7 +3,7 @@
 const _ = require('lodash');
 const mConfig = require('./config.js');
 const mDB = require('./db.js');
-const mDownloader = require('image-downloader');
+const mDownloader = require('image-downloader'); // 2020-01-11 https://gitlab.com/demsking/image-downloader
 const mFlat = require('./flat.js');
 const mShell = require('shelljs');
 const fBase = mConfig.imagesDir();
@@ -27,7 +27,7 @@ const self = module.exports = {
 				const flatId = d['id'];
 				console.log(`Flat: ${flatId}`);
 				//mDB.save(d).then(() => {
-					var fFlat = fBase + '/' + flatId;
+					var fFlat = `${fBase}/${flatId}`;
 					mShell.rm('-rf', fFlat);
 					mShell.mkdir('-p', fFlat);
 					const images = _.mapValues(
@@ -37,8 +37,8 @@ const self = module.exports = {
 					// 2020-01-09 A photo URL looks like https://a0.muscache.com/im/pictures/<GUID>.jpg?aki_policy=xx_large
 					_.each(images, (url, imageId) => {
 						mDownloader
-							.image({dest: fFlat + '/' + imageId + '.jpeg', url: url})
-							.then(({filename}) => {console.log(filename);})
+							.image({dest: `${fFlat}/${imageId}.jpeg`, url})
+							.then(({filename: f}) => {console.log(f);})
 						;
 					});
 					self.step(flats, cb);
