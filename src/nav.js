@@ -52,7 +52,7 @@ const self = module.exports = {
 				$('a[aria-label*=current]', $('ul[data-id=SearchResultsPagination]'))
 					.closest('li').next('li')
 			);
-			return !$a.length ? null : 'https://www.airbnb.com' + $a.attr('href');
+			return !$a.length ? null : `https://www.airbnb.com${$a.attr('href')}`;
 		});
 		await n.end();
 		result = result.concat(flats);
