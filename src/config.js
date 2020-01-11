@@ -28,6 +28,7 @@ module.exports = {
 	maxPages() {return argv.maxPages || 999999;},
 	/**
 	 * 2019-05-18
+	 * @used-by show()
 	 * @used-by flat.js
 	 * @used-by nav.js
 	 * @return {boolean}
@@ -39,5 +40,5 @@ module.exports = {
 	 * @used-by nav.js
 	 * @return {boolean}
 	 */
-	show() {return !!(argv.openDevTools || argv.show);}
+	show() {return this.openDevTools() || !!argv.show;}
 };
