@@ -9,6 +9,7 @@ const mPath = require('path');
  *		,maxPages: ?number
  *		,location: string
  *		,openDevTools: ?boolean
+ *		,skipImages: ?boolean
  *		,show: boolean
  * }}
  */
@@ -41,6 +42,12 @@ module.exports = {
 	 * @return {boolean}
 	 */
 	openDevTools() {return !!argv.openDevTools;},
+	/**
+	 * 2020-01-13
+	 * @used-by flats.js
+	 * @return {boolean}
+	 */
+	skipImages() {return !!argv.skipImages},
 	/**
 	 * 2019-05-18
 	 * @used-by flat.js
