@@ -9,12 +9,16 @@ const mShell = require('shelljs');
 module.exports = {
 	async execute(flats) {
 		mShell.rm('-rf', mConfig.imagesDir());
-		// 2020-01-11 https://stackoverflow.com/a/37576787
-		for (const flat of flats) {
-			const d = await mFlat.execute(flat);
-			console.log(`Flat: ${d['id']}`);
-			mDownloadImages.execute(d);
-			//mDB.save(d);
+		await mDB.client().connect();
+		try {
+			// 2020-01-11 https://stackoverflow.com/a/37576787
+			for (const flat of flats) {
+				const d = await mFlat.execute(flat);
+				console.log(`Flat: ${d['id']}`);
+				mDownloadImages.execute(d);
+				await mDB.save(d);
+			}
 		}
+		finally {mDB.client().close();}
 	}
 };

@@ -2,15 +2,18 @@
 /** @module db */
 const _ = require('lodash');
 const {MongoClient: mMongo} = require('mongodb');
-const self = module.exports = {
+module.exports = {
 	// 2020-01-08
 	// "How to fix «current Server Discovery and Monitoring engine is deprecated» on a MongoDB connection
 	// using the `mongodb` Node.js package?": https://df.tips/t/973
 	client: _.once(() => new mMongo('mongodb://localhost:27017', {useUnifiedTopology: true})),
-	//connect() {return mongo.connect();}
-	//,disconnect() {mongo.close();}
+	/**
+	 * 2020-01-13
+	 * @param {object} d
+	 * @returns {Promise}
+	 */
 	save(d) {
-		const db = self.client().db('airbnb');
+		const db = this.client().db('airbnb');
 		/**
 		 * 2020-01-09
 		 * 1) https://github.com/mongodb/node-mongodb-native/blob/v3.4.1/lib/db.js#L387-L479
@@ -29,7 +32,7 @@ const self = module.exports = {
 		 * http://mongodb.github.io/node-mongodb-native/3.4/api/Cursor.html#toArray
 		 */
 		const cFlat = db.collection('flat');
-		d._id = d.id;
-		return cFlat.insertOne(d);
+		// 2020-01-10 https://stackoverflow.com/a/38883596
+		return cFlat.updateOne({_id : d.id}, {$set: d}, {upsert: true});
 	}
 };
