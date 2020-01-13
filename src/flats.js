@@ -14,11 +14,13 @@ module.exports = {
 			// 2020-01-11 https://stackoverflow.com/a/37576787
 			for (const flat of flats) {
 				const d = await mFlat.execute(flat);
-				console.log(`Flat: ${d['id']}`);
-				if (!mConfig.skipImages()) {
-					mDownloadImages.execute(d);
+				if (d) {
+					console.log(`Flat: ${d['id']}`);
+					if (!mConfig.skipImages()) {
+						mDownloadImages.execute(d);
+					}
+					await mDB.save(d);
 				}
-				await mDB.save(d);
 			}
 		}
 		finally {mDB.client().close();}
