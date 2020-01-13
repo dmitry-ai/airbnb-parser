@@ -39,5 +39,4 @@ const url = `https://www.airbnb.com/s/homes?${mJP(_.assign(fixedParams, {query: 
 	const flats = await mNav.execute(url);
 	console.log(`Flats: ${flats.length}`);
 	mFlats.execute(flats);
-	console.log('done');
 })();
