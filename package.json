@@ -1,9 +1,10 @@
 {
-	"name": "dmitry-ai--airbnb-parser",
+	"name": "flat0--parser",
 	"version": "0.0.1",
 	"description": "An Airbib parser",
 	"author": "Dmitry Fedyuk",
 	"dependencies": {
+        "fs-extra": "*",
 		"image-downloader": "*",
 		"jquery-param": "*",
 		"lodash": "*",
@@ -17,6 +18,6 @@
 	"main": "main.js",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/dmitry-ai/airbnb-parser.git"
+		"url": "https://github.com/flat0/parser.git"
 	}
 }
