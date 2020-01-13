@@ -13,10 +13,15 @@ module.exports = {
 		);
 		// 2020-01-09 A photo URL looks like https://a0.muscache.com/im/pictures/<GUID>.jpg?aki_policy=xx_large
 		_.each(images, (url, id) => {
-			mDownloader
-				.image({dest: `${fFlat}/${id}.jpeg`, url})
-				.then(({filename: f}) => {console.log(f);})
-			;
+			/**
+			 * 2020-01-13
+			 * `mDownloader.image` returns a Promise:
+			 * https://gitlab.com/demsking/image-downloader/tree/v3.5.0#usage-with-promise
+			 * I do not waht for its resolution.
+			 * Previously, I done it with the following code:
+			 * 		.then(({filename: f}) => {console.log(f);})
+			 */
+			mDownloader.image({dest: `${fFlat}/${id}.jpeg`, url});
 		});
 	}
 };
