@@ -4,7 +4,7 @@
 	"description": "An Airbib parser",
 	"author": "Dmitry Fedyuk",
 	"dependencies": {
-        "fs-extra": "*",
+		"fs-extra": "*",
 		"image-downloader": "*",
 		"jquery-param": "*",
 		"lodash": "*",
