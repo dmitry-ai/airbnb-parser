@@ -64,9 +64,7 @@ module.exports = {
 	 * @param {string} k E.g.: «db.local»
 	 * @returns {string|objecy}
 	 */
-	private(k) {return _.get(_.once(() => JSON.parse(mFs.readFileSync(
-		this.path('_my/private.json'), 'utf8'
-	)))(), k)},
+	private(k) {return _.get(_.once(() => JSON.parse(mFs.readFileSync(this.path('_my/private.json'), 'utf8')))(), k)},
 	/**
 	 * 2020-01-13
 	 * @used-by flats.js
