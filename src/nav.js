@@ -6,7 +6,7 @@ const Nightmare = require('nightmare'); // 2020-01-10 https://github.com/segment
 module.exports = {
 	/**
 	 * 2020-01-10
-	 * @used-by main.js
+	 * @see module:main
 	 * @param {string} url
 	 * @return {string[]}
 	 */
@@ -25,13 +25,11 @@ module.exports = {
 	/**
 	 * 2020-01-10
 	 * @private
-	 * @used-by execute()
+	 * @see #execute
 	 * @param {string} url
 	 */
 	,async page(url) {
-		const n = Nightmare({
-			height: 1000, modal: false, openDevTools: mConfig.openDevTools(), show: mConfig.show(), width: 800
-		});
+		const n = Nightmare({height: 1000, modal: false, openDevTools: mConfig.openDevTools(), show: mConfig.show(), width: 800});
 		n.goto(url);
 		n.wait('div[itemprop="itemListElement"]');
 		n.inject('js', 'lib/jquery.js');

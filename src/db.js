@@ -3,12 +3,17 @@
 const _ = require('lodash');
 const {MongoClient: mMongo} = require('mongodb');
 module.exports = {
-	// 2020-01-08
-	// "How to fix «current Server Discovery and Monitoring engine is deprecated» on a MongoDB connection
-	// using the `mongodb` Node.js package?": https://df.tips/t/973
+	/**
+	 * 2020-01-08
+	 * "How to fix «current Server Discovery and Monitoring engine is deprecated» on a MongoDB connection
+	 * using the `mongodb` Node.js package?": https://df.tips/t/973
+	 * @see #save
+	 * @see module:flats#execute
+	 */
 	client: _.once(() => new mMongo('mongodb://localhost:27017', {useUnifiedTopology: true})),
 	/**
 	 * 2020-01-13
+	 * @see module:flats#execute
 	 * @param {object} d
 	 * @returns {Promise}
 	 */

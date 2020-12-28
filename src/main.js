@@ -1,3 +1,4 @@
+/** @module main */
 // 2019-04-19
 // 2019-05-18
 // An usage example:

@@ -1,10 +1,16 @@
 // 2019-04-21 https://github.com/segmentio/nightmare/issues/625#issuecomment-217730846
 /** @module scroll */
 module.exports = {
+	/**
+	 * 2019-04-21
+	 * @see module:nav#page
+	 * @param {Nightmare} n
+	 * @returns {Promise<void>}
+	 */
 	execute(n) {return this.step(n, null, 0);},
 	/**
 	 * 2020-01-10
-	 * @used-by execute
+	 * @see #execute
 	 * @param {Nightmare} n
 	 * @param {number} prev
 	 * @param {number} cur
