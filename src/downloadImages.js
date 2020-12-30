@@ -5,6 +5,11 @@ const mConfig = require('./config.js');
 const mDownloader = require('image-downloader'); // 2020-01-11 https://gitlab.com/demsking/image-downloader
 const mShell = require('shelljs');
 module.exports = {
+	/**
+	 * 2020-01-11
+	 * @see module:flats#execute
+	 * @param d
+	 */
 	execute(d) {
 		const fFlat = `${mConfig.imagesDir()}/${d['id']}`;
 		mShell.mkdir('-p', fFlat);
