@@ -8,8 +8,8 @@
 		"image-downloader": "*",
 		"jquery-param": "*",
 		"lodash": "*",
-		"nightmare": "*",
 		"mongodb": "*",
+		"nightmare": "*",
 		"path": "*",
 		"shelljs": "*",
 		"yargs": "*"
